@@ -1,10 +1,13 @@
 import random
 
-import numpy as np
 from flask import Flask, request
+
+import numpy as np
+from flask_cors import CORS
 from scipy.special import softmax
 
 app = Flask(__name__)
+CORS(app)
 
 
 possible = [
