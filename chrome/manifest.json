@@ -1,0 +1,15 @@
+{
+    "name": "dbunk.ai",
+    "version": "1.0",
+    "description": "Using ML to detect suspicious news articles",
+    "permissions": [
+      "activeTab",
+      "tabs"
+    ],
+    "browser_action": {
+      "default_icon": "images/icon.png",
+      "default_popup": "popup.html", 
+      "default_title": "Open popup"
+    },
+    "manifest_version": 2
+  }

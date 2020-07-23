@@ -1,0 +1,13 @@
+body{
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    width:500px;
+}
+.float-container {
+    display: flex;
+    align-items: center;
+}
+.float-child:first-child {
+    flex: 0;
+    margin-right: 20px;
+}  
