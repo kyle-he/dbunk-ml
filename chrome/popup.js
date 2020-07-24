@@ -28,7 +28,7 @@ function getPopup(score){
     const newText = document.createElement('div');
     const newImg = document.createElement('div');
     newImg.innerHTML = `<i  id="status-image" class="${pages[highestAttribute[0]].icon}" style="color:${pages[highestAttribute[0]].color}" ></i>`;
-    newText.innerHTML = `<div id="status-text" style="font-size:18px;color:${pages[highestAttribute[0]].color}" > ${pages[highestAttribute[0]].description} </div>`;
+    newText.innerHTML = `<div id="status-text" style="font-size:18px;color:${pages[highestAttribute[0]].color}" > ${highestAttribute[0].charAt(0).toUpperCase() + highestAttribute[0].slice(1)} with ${highestAttribute[1].toFixed(3)*100}% confidence. ${pages[highestAttribute[0]].description} </div>`;
     
     oldImg.parentNode.replaceChild(newImg, oldImg);
     oldText.parentNode.replaceChild(newText, oldText);
