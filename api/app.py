@@ -10,21 +10,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-possible = [
-    "rumor",
-    "hate",
-    "unreliable",
-    "conspiracy",
-    "clickbait",
-    "satire",
-    "fake",
-    "reliable",
-    "bias",
-    "political",
-    "junksci",
-    "unknown",
-]
-
+possible = ["fake", "bias", "satire", "political", "reliable"]
 
 @app.route("/", methods=["POST"])
 def dbl():
