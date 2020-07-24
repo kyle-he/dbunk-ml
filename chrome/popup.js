@@ -9,7 +9,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
    }
 );
 
-async function getScore(url){
+function getScore(url){
     return postData("https://api.dbunk.ml", {url: url});
 }
 
