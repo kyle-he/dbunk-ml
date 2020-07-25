@@ -104,10 +104,6 @@ function getPopup(score, url) {
         const rating = document.getElementById("site-rating");
         const descrip = document.getElementById("bias-descrip");
 
-        const newTitle = document.createElement("div");
-        const newRating = document.createElement("span");
-        const newDescrip = document.createElement("div");
-
         title.innerHTML = siteStats.title;
         rating.innerHTML = ratingObjs[siteStats.bias_rating].alt;
         descrip.innerHTML = ratingObjs[siteStats.bias_rating].desc;
