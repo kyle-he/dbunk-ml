@@ -16,24 +16,30 @@ function getScore(url){
 }
 
 function getSite(url){
-    for (var site in bias){
-        if (url.includes(site.url.toLowerCase().replace("\\", "").replace("http://", "https://").replace("www.", ""))){
-            console.log(site.news_source)
-            return;
-        }
+    for (var site of bias){
+        try {
+            if (url.includes(site.url.toLowerCase().replace("\\", "").replace("http://", "https://").replace("www.", "")) && site.url != ""){
+                return{title: site.news_source, 
+                       allsides_url: site.allsides_url, 
+                       bias_rating: site.bias_rating,
+                       retrieved: true
+                    }
+            }
+        } catch(TypeError) {}
     }
-    console.log("not found")
+    return{
+        retrieved: False
+    }
 }
-function getBias(url){
+function getDescrip(url){
     var name = "temp";
-    $.get('https://www.allsides.com/node/18425', function(response) {  
+    $.get(url, function(response) {  
         var challenges = $(response).find('latest_news_source');
         console.log(challenges)
     });
 }
 function getPopup(score, url){
-    getBias(url)
-    getSite(url)
+    var siteStats = getSite(url)
     var ratingObjs = {
         "71": {"img": "images/bias-left.png", "alt": "Left bias",
             "desc": "This site tends to be biased to the left. This trend reflects the site as a whole and not any specific article."},
@@ -50,7 +56,23 @@ function getPopup(score, url){
         "2690": {"img": "images/bias-not-yet-rated.png", "alt": "Site not rated",
             "desc": "This site has not yet been rated."}
     };
+    if  (siteStats.retrieved){
+        const oldTitle = document.getElementById("title")
+        const oldRating = document.getElementById("bias")
+        const oldDescrip = document.getElementById("bias-descrip")
+    
+        const newTitle = document.createElement('div');
+        const newRating = document.createElement('span');
+        const newDescrip = document.createElement('div');
 
+        newTitle.innerHTML = `<div id="title" class="title normal_text no_padding">${siteStats.title}</div>`;
+        newRating.innerHTML = `<span id="bias">${ratingObjs[siteStats.bias_rating].alt}</span>`;
+        newDescrip.innerHTML = `<div id="bias-descrip">${ratingObjs[siteStats.bias_rating].desc}</div>`;
+
+        oldTitle.parentNode.replaceChild(newTitle, oldTitle);
+        oldRating.parentNode.replaceChild(newRating, oldRating);
+        oldDescrip.parentNode.replaceChild(newDescrip, oldDescrip);
+    }
     var highestAttribute = ["unknown", 0]
     for (const [key,value] of Object.entries(score.result)){
         if (value > highestAttribute[1]){
