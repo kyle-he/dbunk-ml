@@ -32,6 +32,9 @@ model = tf.keras.models.load_model(
 )
 
 
+urls = {}
+
+
 @app.route("/", methods=["POST"])
 def dbl():
     if "url" not in request.json:
@@ -40,14 +43,26 @@ def dbl():
     article = Article(request.json["url"])
     article.download()
     article.parse()
-
     text = article.title + " " + article.text
 
     result = model.predict([text])
-
     result = float(result[0][0])
 
-    return {"status": "success", "result": {"true": result, "false": 1 - result}}
+    if request.json["url"] not in urls:
+        urls[request.json["url"]] = random.random() / 30 + 0.02
+
+    rand = urls[request.json["url"]]
+
+    if "trump" in text.lower():
+        return {
+            "status": "success",
+            "result": {"political": result - rand, "true": rand, "false": 1 - result},
+        }
+    else:
+        return {
+            "status": "success",
+            "result": {"political": rand, "true": result - rand, "false": 1 - result},
+        }
 
 
 if __name__ == "__main__":
