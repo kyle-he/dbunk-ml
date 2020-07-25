@@ -1,30 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-<script src="jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,600&display=swap" rel="stylesheet">
+    <script src="jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,600&display=swap" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+
+    <script type="module" src="popup.js"></script>
 </head>
 
-<div id="title" class="title normal_text no_padding">dbunk.ml</div>
-<div class="no_padding normal_text" style="padding-bottom: 10px;" ><strong>Political Bias: </strong> <span id="bias" >Not Avaliable</span> </div> 
-<div id="bias-descrip"></div> 
-
 <body>
-<div class="float-container">
-    <div class="float-child">
-        <i  id="status-image" class="fas fa-check-circle fa-5x" style="color:#d3d3d3" ></i>
-      </div>
-      
-      <div class="float-child">
-        <div id="status-text" style="font-size:18px;color:#d3d3d3" > Loading... </div>
-      </div>
-</div>
+    <div style="min-width: 300px;" class="py-4 px-6">
+        <div class="flex flex-col">
+            <p class="text-lg text-gray-800 text-center font-bold">
+                dbunk.ml
+            </p>
 
-<script type="module" src="popup.js"></script>
+            <div class="my-2 flex flex-col">
+                <div class="mx-auto mb-1" id="status-image">
+                    <i class="fas fa-check-circle fa-5x" style="color: #d3d3d3;"></i>
+                </div>
+                <div id="status-text" class="text-center text-lg font-bold">
+                    Loading...
+                </div>
+                <div id="status-confidence" class="text-center text-base text-gray-800"></div>
+                <div id="status-subtext" class="text-center text-sm text-gray-600"></div>
+            </div>
 
+            <p class="text-lg text-gray-800 text-center font-bold mt-2" id="site-title">
+                Site details
+            </p>
+
+            <p class="text-center text-base text-gray-800">
+                <span class="font-bold">Bias:</span>
+                <span id="site-rating"></span>
+            </p>
+            <p class="text-center text-sm text-gray-600" id="bias-descrip"></p>
+        </div>
+    </div>
 </body>
 
 </html>
