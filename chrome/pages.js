@@ -23,6 +23,11 @@ var pages = {
         icon: "fas fa-exclamation-triangle fa-5x",
         color: "#cdaf0a",
         description: "Our algorithms indicate that this article may contain falsified or twisted information. "
+    },
+    unknown: {
+        icon: "fas fa-exclamation-triangle fa-5x",
+        color: "#cdaf0a",
+        description: "Our algorithms indicate that this article may contain falsified or twisted information. "
     }
 };
 export {pages};
