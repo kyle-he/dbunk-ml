@@ -100,6 +100,8 @@ function getPopup(score, url) {
     };
 
     if (siteStats.retrieved) {
+        const details = document.getElementById("site-details");
+
         const title = document.getElementById("site-title");
         const rating = document.getElementById("site-rating");
         const descrip = document.getElementById("bias-descrip");
@@ -107,6 +109,8 @@ function getPopup(score, url) {
         title.innerHTML = siteStats.title;
         rating.innerHTML = ratingObjs[siteStats.bias_rating].alt;
         descrip.innerHTML = ratingObjs[siteStats.bias_rating].desc;
+
+        details.classList.remove("hidden");
     }
 
     var highestAttribute = ["unknown", 0];
@@ -116,13 +120,11 @@ function getPopup(score, url) {
         }
     }
 
-    console.log(score);
-    console.log(highestAttribute);
-
     const img = document.getElementById("status-image");
     const text = document.getElementById("status-text");
     const confidence = document.getElementById("status-confidence");
     const subtext = document.getElementById("status-subtext");
+    const link = document.getElementById("status-link");
 
     img.innerHTML = `<i class="${
         pages[highestAttribute[0]].icon
@@ -137,6 +139,10 @@ function getPopup(score, url) {
         highestAttribute[1].toFixed(3) * 100
     }%`;
     subtext.innerHTML = pages[highestAttribute[0]].description;
+
+    link.innerHTML = `<a href="https://dbunk.ml/analyze?url=${encodeURIComponent(
+        url
+    )}" target="_blank">More info</a>`;
 }
 
 async function postData(url, data = {}) {
