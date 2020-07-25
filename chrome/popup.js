@@ -5,6 +5,8 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
         console.log(tabs[0].url);
         console.log(getScore(tabs[0].url))
         const distributions = await getScore(tabs[0].url)
+        var simplifiedURL = tabs[0].url.toLowerCase().replace("http://", "https://").replace("www.", "");
+        console.log(simplifiedURL)
         getPopup(distributions)
    }
 );
@@ -14,6 +16,7 @@ function getScore(url){
 }
 
 function getPopup(score){
+    
     var highestAttribute = ["unknown", 0]
     for (const [key,value] of Object.entries(score.result)){
         if (value > highestAttribute[1]){
