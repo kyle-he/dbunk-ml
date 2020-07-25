@@ -28,7 +28,7 @@ function getSite(url){
         } catch(TypeError) {}
     }
     return{
-        retrieved: False
+        retrieved: false
     }
 }
 function getDescrip(url){
