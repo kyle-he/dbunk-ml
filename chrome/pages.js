@@ -1,11 +1,11 @@
 var pages = {
-    reliable: {
+    true: {
         icon: "fas fa-check-circle fa-5x",
         color: "#04b401",
         description:
-            "Our algorithms indicate that this article has a high chance of being credible.",
+            "Our algorithms indicate that this article is credible.",
     },
-    fake: {
+    false: {
         icon: "fas fa-times-circle fa-5x",
         color: "#a21010",
         description:
