@@ -51,7 +51,7 @@ def dbl():
     if request.json["url"] not in urls:
         urls[request.json["url"]] = random.random() / 30 + 0.02
 
-    rand = urls[request.json["url"]]
+    rand = min(urls[request.json["url"]], result)
 
     if "trump" in text.lower():
         return {

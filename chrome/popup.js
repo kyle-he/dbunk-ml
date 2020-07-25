@@ -143,6 +143,9 @@ function getPopup(score, url) {
     link.innerHTML = `<a href="https://dbunk.ml/analyze?url=${encodeURIComponent(
         url
     )}" target="_blank">More info</a>`;
+
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("hide-loading").classList.remove("hidden");
 }
 
 async function postData(url, data = {}) {
