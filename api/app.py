@@ -43,7 +43,7 @@ def dbl():
     article = Article(request.json["url"])
     article.download()
     article.parse()
-    text = article.title + " " + article.text
+    text = article.title + "\n\n" + article.text
 
     result = model.predict([text])
     result = float(result[0][0])
@@ -57,11 +57,15 @@ def dbl():
         return {
             "status": "success",
             "result": {"political": result - rand, "true": rand, "false": 1 - result},
+            "title": article.title,
+            "text": article.text,
         }
     else:
         return {
             "status": "success",
             "result": {"political": rand, "true": result - rand, "false": 1 - result},
+            "title": article.title,
+            "text": article.text,
         }
 
 
