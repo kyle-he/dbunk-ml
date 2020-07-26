@@ -9,7 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="tailwind.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/d80ce6916d.js" crossorigin="anonymous"></script>
 </head>
@@ -28,16 +28,16 @@
                             <p class="mt-4 text-lg text-gray-300 mb-8">
                                 Advanced fake news analyzer powered by Deep Learning
                             </p>
-                            <div class="flex">
+                            <form action="/analyze.html" class="flex">
                                 <input type="text"
                                     class="px-3 py-3 mr-4 placeholder-gray-600 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                                    placeholder="Enter URL..." style="transition: all 0.15s ease 0s;" />
+                                    placeholder="Enter URL..." style="transition: all 0.15s ease 0s;" name="url" />
                                 <button
                                     class="bg-indigo-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none"
-                                    type="button" style="transition: all 0.15s ease 0s;">
+                                    type="submit" style="transition: all 0.15s ease 0s;">
                                     Analyze
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,8 @@
                                 </div>
                                 <h6 class="text-xl font-semibold">Detailed</h6>
                                 <p class="mt-2 mb-4 text-gray-600">
-                                    Our algorithms deliver comprehensive analysis and political bias indicators from hundreds of news sites instantly in a simple user friendly interface.
+                                    Our algorithms deliver comprehensive analysis and political bias indicators from
+                                    hundreds of news sites instantly in a simple user friendly interface.
                                 </p>
                             </div>
                         </div>

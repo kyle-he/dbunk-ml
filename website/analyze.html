@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dbunk.ml</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/d80ce6916d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="bias.js"></script>
+    <script src="pages.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body class="text-gray-800 antialiased flex flex-col" style="min-height: 100vh;">
+    <main class="flex flex-1 flex-col" id="main">
+        <section class="relative block" style="height: 500px;">
+            <div class="absolute top-0 w-full h-full bg-center bg-cover"
+                style='background-image: url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80");'>
+                <span id="blackOverlay" class="w-full h-full absolute opacity-50 bg-black"></span>
+            </div>
+            <div class="container relative mx-auto" style="padding-top: 150px;">
+                <img src="logo.png" style="max-width: 300px;" class="mx-auto mb-8">
+            </div>
+            <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+                style="height: 70px; transform: translateZ(0px);">
+                <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                    <polygon class="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+        <section class="relative py-16 bg-gray-300 flex-1">
+            <div class="container mx-auto">
+                <div
+                    class="relative flex px-8 flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                    <div class="px-6">
+                        <div class="text-center mt-12">
+                            <h3 class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
+                                Analysis
+                            </h3>
+                            <div class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
+                                {{ url }}
+                            </div>
+                        </div>
+                        <div class="mt-10 py-10 border-t border-gray-300 flex flex-col text-center"
+                            v-if="score == null">
+                            <i class="fas fa-circle-notch fa-spin fa-5x" style="color: #d3d3d3;"></i>
+                        </div>
+                        <div v-else class="lg:flex lg:flex-row lg:w-10/12 lg:mx-auto">
+                            <div class="flex-1">
+                                <div class="mt-10 py-10 border-t border-gray-300 flex flex-col">
+                                    <div class="mx-auto mb-1" id="status-image">
+                                        <i :class="pages[highestAttribute[0]].icon"
+                                            :style="{ color: pages[highestAttribute[0]].color }"></i>
+                                    </div>
+                                    <p id="status-text" class="text-center text-lg font-bold"
+                                        :style="{ color: pages[highestAttribute[0]].color }">
+                                        {{highestAttribute[0].charAt(0).toUpperCase() +
+                                                highestAttribute[0].slice(1)}}
+                                    </p>
+                                    <p id="status-confidence" class="text-center text-base text-gray-800 mb-1">
+                                        Confidence: {{highestAttribute[1].toFixed(3) * 100}}%
+                                    </p>
+                                    <p id="status-subtext" class="text-center text-sm leading-tight text-gray-600">
+                                        {{pages[highestAttribute[0]].description}}
+                                    </p>
+                                </div>
+                                <div class="py-10 flex flex-col">
+                                    <div class="lg:w-8/12 lg:mx-auto text-center">
+                                        <p class="text-2xl mb-3">Breakdown</p>
+                                        <div class="relative pt-1" v-for="(type, key) in score.result">
+                                            <div class="flex mb-2 items-center justify-between">
+                                                <div>
+                                                    <span
+                                                        class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full"
+                                                        :class="{['text-' + pages[key].bgColor + '-600']: true, ['bg-' + pages[key].bgColor + '-200']: true}">
+                                                        {{key}}
+                                                    </span>
+                                                </div>
+                                                <div class="text-right">
+                                                    <span class="text-xs font-semibold inline-block"
+                                                        :class="{['text-' + pages[key].bgColor + '-600']: true}">
+                                                        {{Math.round(type * 10000) / 100}}%
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="overflow-hidden h-2 mb-4 text-xs flex rounded"
+                                                :class="{['bg-' + pages[key].bgColor + '-200']: true}">
+                                                <div :style="{width: Math.round(type * 100) + '%'}"
+                                                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
+                                                    :class="{['bg-' + pages[key].bgColor + '-600']: true}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="lg:mt-10 py-10 lg:border-t lg:border-gray-300 flex flex-col">
+                                    <div class="lg:w-8/12 lg:mx-auto">
+                                        <div v-if="site != null">
+                                            <p class="text-xl text-gray-800 font-bold">{{ site.title }}</p>
+
+                                            <p class="text-base text-gray-800 mb-1">{{ site.rating }}</p>
+                                            <p class="text-base leading-tight text-gray-600 mb-3">
+                                                {{ site.desc }}</p>
+                                            <p class="text-base text-blue-600"><a :href="site.link">View AllSides
+                                                    Analysis</a></p>
+                                        </div>
+
+                                        <div v-else>
+                                            <p class="text-base leading-tight text-gray-600 mb-3">
+                                                <br>
+                                                <br>
+                                                <br>
+                                                Sorry, political bias
+                                                information is not available for this site.
+                                                <br>
+                                                <br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-10 flex flex-col">
+                                    <div class="lg:w-8/12 lg:mx-auto lg:mt-12">
+                                        <p class="text-xl font-bold">How should I interpret this?</p>
+                                        <p>{{pages[highestAttribute[0]].longdesc}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-10 border-t border-gray-300 flex flex-col" v-if="score != null">
+                            <p class="text-2xl mb-3 text-center">Article Text</p>
+                            <p class="text-lg font-bold mb-4">
+                                {{score.title}}
+                            </p>
+                            <p v-for="par in score.text.trim().split(/\s*[\r\n]+\s*/g)" class="mb-2">
+                                {{par}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
