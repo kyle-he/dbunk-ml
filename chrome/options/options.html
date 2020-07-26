@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;1,600&display=swap" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+</head>
+
+<body style="min-width: 300px;">
+    <div class="bg-gray-800 py-4" style=" position: relative;">
+        <a href="https://www.dbunk.ml" target="_blank"><img src="../logo.png" style="max-width: 300px;"
+                class="mx-auto" />
+        </a>
+    </div>
+
+    <div><label>
+        Show News Bias?
+        <input type="checkbox" id="show-bias">
+    </label></div>
+
+    <div><label>
+        Uncertainty Threshhold (0.5-1): 
+        <input type="text" id="threshhold" name= "threshhold" value="0.6">
+        
+    </label></div>
+
+    <div><label>
+        Display Type:
+        <select name= "display-type" id="display-type">
+            <option id="horizontal" value="horizontal">horizontal</option>
+            <option id="vertical" value="vertical">vertical</option>
+        </select>
+    </label></div>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

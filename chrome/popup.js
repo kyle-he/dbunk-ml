@@ -113,9 +113,9 @@ function getPopup(score, url) {
         details.classList.remove("hidden");
     }
 
-    var highestAttribute = ["unknown", 0];
+    var highestAttribute = ["uncertain", 0];
     for (const [key, value] of Object.entries(score.result)) {
-        if (value > highestAttribute[1]) {
+        if (value > highestAttribute[1] && value>0.6) {
             highestAttribute = [key, value];
         }
     }
@@ -132,12 +132,14 @@ function getPopup(score, url) {
 
     text.style.color = pages[highestAttribute[0]].color;
 
+    if (highestAttribute[0] != "uncertain"){
+        confidence.innerHTML = `Confidence: ${
+            highestAttribute[1].toFixed(3) * 100
+        }%`;
+    }
     text.innerHTML =
         highestAttribute[0].charAt(0).toUpperCase() +
         highestAttribute[0].slice(1);
-    confidence.innerHTML = `Confidence: ${
-        highestAttribute[1].toFixed(3) * 100
-    }%`;
     subtext.innerHTML = pages[highestAttribute[0]].description;
 
     link.innerHTML = `<a href="https://dbunk.ml/analyze?url=${encodeURIComponent(

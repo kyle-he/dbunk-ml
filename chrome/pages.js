@@ -29,9 +29,9 @@ var pages = {
         description:
             "Our algorithms indicate that this article is heavily political.",
     },
-    unknown: {
-        icon: "fas fa-exclamation-triangle fa-5x",
-        color: "#cdaf0a",
+    uncertain: {
+        icon: "fa fa-question-circle fa-5x",
+        color: "#A0A0A0",
         description:
             "Our algorithms weren't able to identify the nature of this article.",
     },
