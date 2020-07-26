@@ -1,5 +1,7 @@
 # sketchy-news
 
+Code for [dbunk.ml](https://dbunk.ml). **Machine Learning** code is in `api/` folder, **extension** code is in `chrome/` folder, and **website** code is in `website/` folder.
+
 ## The problem
 
 The advent of the Internet and the Information Age has transformed the way we receive and interact with information. Billions of people worldwide now rely on online news sources to stay up-to-date with current topics, and we are now able to spread information at speeds never seen before.
