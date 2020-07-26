@@ -1,8 +1,12 @@
+// Retrieve url
+
 var urlParams = new URLSearchParams(window.location.search);
 
 if (!urlParams.has("url")) {
-    // window.location.href = "https://dbunk.ml";
+    window.location.href = "https://dbunk.ml";
 }
+
+// Initialize vue app
 
 var app = new Vue({
     el: "#main",
@@ -25,6 +29,8 @@ var app = new Vue({
         },
     },
 });
+
+// Get the news site information
 
 function getSite(url) {
     for (var site of bias) {
@@ -53,6 +59,8 @@ function getSite(url) {
     };
 }
 
+// Post data to the ML endpoint
+
 async function postData(url, data = {}) {
     const response = await fetch(url, {
         method: "POST",
@@ -67,6 +75,8 @@ async function postData(url, data = {}) {
 function getScore(url) {
     return postData("https://api.dbunk.ml", { url: url });
 }
+
+// Retrieve data
 
 async function main() {
     var siteStats = getSite(app.url);

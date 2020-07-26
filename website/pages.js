@@ -1,3 +1,9 @@
+/*
+
+Text that is displayed for each category
+
+*/
+
 var pages = {
     true: {
         icon: "fas fa-check-circle fa-5x",

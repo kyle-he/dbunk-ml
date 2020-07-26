@@ -51,22 +51,12 @@ def dbl():
     if request.json["url"] not in urls:
         urls[request.json["url"]] = random.random() / 30 + 0.02
 
-    rand = min(urls[request.json["url"]], result)
-
-    if "trump" in text.lower():
-        return {
-            "status": "success",
-            "result": {"political": result - rand, "true": rand, "false": 1 - result},
-            "title": article.title,
-            "text": article.text,
-        }
-    else:
-        return {
-            "status": "success",
-            "result": {"political": rand, "true": result - rand, "false": 1 - result},
-            "title": article.title,
-            "text": article.text,
-        }
+    return {
+        "status": "success",
+        "result": result,
+        "title": article.title,
+        "text": article.text,
+    }
 
 
 if __name__ == "__main__":

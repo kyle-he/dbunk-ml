@@ -1,3 +1,9 @@
+/*
+
+Storing the text that will be displayed for each category
+
+*/
+
 var pages = {
     true: {
         icon: "fas fa-check-circle fa-5x",
@@ -10,18 +16,6 @@ var pages = {
         color: "#a21010",
         description:
             "Our algorithms indicate that this article may contain falsified or twisted information. Proceed with caution.",
-    },
-    bias: {
-        icon: "fas fa-exclamation-triangle fa-5x",
-        color: "#cdaf0a",
-        description:
-            "Our algorithms indicate that this article may be heavily biased. Proceed with caution.",
-    },
-    satire: {
-        icon: "fas fa-exclamation-triangle fa-5x",
-        color: "#cdaf0a",
-        description:
-            "Our algorithms indicate that this article contains satire.",
     },
     political: {
         icon: "fas fa-exclamation-triangle fa-5x",
@@ -36,4 +30,5 @@ var pages = {
             "Our algorithms weren't able to identify the nature of this article.",
     },
 };
+
 export { pages };
