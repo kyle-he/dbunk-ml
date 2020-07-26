@@ -40,7 +40,7 @@ function getSite(url) {
                     retrieved: true,
                 };
             }
-        } catch (TypeError) {}
+        } catch (TypeError) { }
     }
     return {
         retrieved: false,
@@ -55,99 +55,112 @@ function getDescrip(url) {
 }
 function getPopup(score, url) {
     var siteStats = getSite(url);
-    var ratingObjs = {
-        "71": {
-            img: "images/bias-left.png",
-            alt: "Left bias",
-            desc:
-                "This site tends to be biased to the left. This trend reflects the site as a whole and not any specific article.",
+    chrome.storage.local.get(
+        {
+            showbias: true,
+            threshhold: 0.6,
+            displayType: "vertical",
         },
-        "72": {
-            img: "images/bias-leaning-left.png",
-            alt: "Leaning left bias",
-            desc:
-                "This site tends to be slightly biased to the left. This trend reflects the site as a whole and not any specific article.",
-        },
-        "73": {
-            img: "images/bias-center.png",
-            alt: "Center bias",
-            desc:
-                "This site tends to be centrally aligned. This trend reflects the site as a whole and not any specific article.",
-        },
-        "74": {
-            img: "images/bias-leaning-right.png",
-            alt: "Leaning right bias",
-            desc:
-                "This site tends to be slightly biased to the right. This trend reflects the site as a whole and not any specific article.",
-        },
-        "75": {
-            img: "images/bias-right.png",
-            alt: "Right bias",
-            desc:
-                "This site tends to be biased to the right. This trend reflects the site as a whole and not any specific article.",
-        },
-        "2707": {
-            img: "images/bias-mixed.png",
-            alt: "Mixed bias",
-            desc:
-                "This site has a very mixed alignment, or simply doesn't fall on the left/right partisanship scale.",
-        },
-        "2690": {
-            img: "images/bias-not-yet-rated.png",
-            alt: "Site not rated",
-            desc: "This site has not yet been rated.",
-        },
-    };
+        function (items) {
+            var styles = items;
+            //document.getElementById('unknown-limit').checked = items.likesColor;
 
-    if (siteStats.retrieved) {
-        const details = document.getElementById("site-details");
+            console.log(styles)
+            var ratingObjs = {
+                "71": {
+                    img: "images/bias-left.png",
+                    alt: "Left bias",
+                    desc:
+                        "This site tends to be biased to the left. This trend reflects the site as a whole and not any specific article.",
+                },
+                "72": {
+                    img: "images/bias-leaning-left.png",
+                    alt: "Leaning left bias",
+                    desc:
+                        "This site tends to be slightly biased to the left. This trend reflects the site as a whole and not any specific article.",
+                },
+                "73": {
+                    img: "images/bias-center.png",
+                    alt: "Center bias",
+                    desc:
+                        "This site tends to be centrally aligned. This trend reflects the site as a whole and not any specific article.",
+                },
+                "74": {
+                    img: "images/bias-leaning-right.png",
+                    alt: "Leaning right bias",
+                    desc:
+                        "This site tends to be slightly biased to the right. This trend reflects the site as a whole and not any specific article.",
+                },
+                "75": {
+                    img: "images/bias-right.png",
+                    alt: "Right bias",
+                    desc:
+                        "This site tends to be biased to the right. This trend reflects the site as a whole and not any specific article.",
+                },
+                "2707": {
+                    img: "images/bias-mixed.png",
+                    alt: "Mixed bias",
+                    desc:
+                        "This site has a very mixed alignment, or simply doesn't fall on the left/right partisanship scale.",
+                },
+                "2690": {
+                    img: "images/bias-not-yet-rated.png",
+                    alt: "Site not rated",
+                    desc: "This site has not yet been rated.",
+                },
+            };
 
-        const title = document.getElementById("site-title");
-        const rating = document.getElementById("site-rating");
-        const descrip = document.getElementById("bias-descrip");
+            if (siteStats.retrieved && styles.showbias) {
+                const details = document.getElementById("site-details");
 
-        title.innerHTML = siteStats.title;
-        rating.innerHTML = ratingObjs[siteStats.bias_rating].alt;
-        descrip.innerHTML = ratingObjs[siteStats.bias_rating].desc;
+                const title = document.getElementById("site-title");
+                const rating = document.getElementById("site-rating");
+                const descrip = document.getElementById("bias-descrip");
 
-        details.classList.remove("hidden");
-    }
+                title.innerHTML = siteStats.title;
+                rating.innerHTML = ratingObjs[siteStats.bias_rating].alt;
+                descrip.innerHTML = ratingObjs[siteStats.bias_rating].desc;
 
-    var highestAttribute = ["uncertain", 0];
-    for (const [key, value] of Object.entries(score.result)) {
-        if (value > highestAttribute[1] && value>0.6) {
-            highestAttribute = [key, value];
+                details.classList.remove("hidden");
+            }
+
+            var highestAttribute = ["uncertain", 0];
+            for (const [key, value] of Object.entries(score.result)) {
+                if (value > highestAttribute[1] && value > items.threshhold) {
+                    highestAttribute = [key, value];
+                }
+            }
+
+            const img = document.getElementById("status-image");
+            const text = document.getElementById("status-text");
+            const confidence = document.getElementById("status-confidence");
+            const subtext = document.getElementById("status-subtext");
+            const link = document.getElementById("status-link");
+
+            img.innerHTML = `<i class="${
+                pages[highestAttribute[0]].icon
+                }" style="color:${pages[highestAttribute[0]].color}"></i>`;
+
+            text.style.color = pages[highestAttribute[0]].color;
+
+            if (highestAttribute[0] != "uncertain") {
+                confidence.innerHTML = `Confidence: ${
+                    highestAttribute[1].toFixed(3) * 100
+                    }%`;
+            }
+            text.innerHTML =
+                highestAttribute[0].charAt(0).toUpperCase() +
+                highestAttribute[0].slice(1);
+            subtext.innerHTML = pages[highestAttribute[0]].description;
+
+            link.innerHTML = `<a href="https://dbunk.ml/analyze?url=${encodeURIComponent(
+                url
+            )}" target="_blank">More info</a>`;
+
+            document.getElementById("loading").classList.add("hidden");
+            document.getElementById("hide-loading").classList.remove("hidden");
         }
-    }
-
-    const img = document.getElementById("status-image");
-    const text = document.getElementById("status-text");
-    const confidence = document.getElementById("status-confidence");
-    const subtext = document.getElementById("status-subtext");
-    const link = document.getElementById("status-link");
-
-    img.innerHTML = `<i class="${
-        pages[highestAttribute[0]].icon
-    }" style="color:${pages[highestAttribute[0]].color}"></i>`;
-
-    text.style.color = pages[highestAttribute[0]].color;
-
-    if (highestAttribute[0] != "uncertain"){
-        confidence.innerHTML = `Confidence: ${
-            highestAttribute[1].toFixed(3) * 100
-        }%`;
-    }
-    text.innerHTML =
-        highestAttribute[0].charAt(0).toUpperCase() +
-        highestAttribute[0].slice(1);
-    subtext.innerHTML = pages[highestAttribute[0]].description;
-
-    link.innerHTML = `<a href="https://dbunk.ml/analyze?url=${encodeURIComponent(
-        url
-    )}" target="_blank">More info</a>`;
-
-    document.getElementById("loading").classList.add("hidden");
-    document.getElementById("hide-loading").classList.remove("hidden");
+    );
 }
 
 async function postData(url, data = {}) {
