@@ -73,7 +73,7 @@ async function postData(url, data = {}) {
 }
 
 function getScore(url) {
-    return postData("https://api.dbunk.ml", { url: url });
+    return postData("https://dbunk-api.herokuapp.com", { url: url });
 }
 
 // Retrieve data
