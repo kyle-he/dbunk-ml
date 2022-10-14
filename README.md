@@ -1,6 +1,6 @@
 # sketchy-news
 
-Code for [dbunk.ml](https://dbunk.ml). **Machine Learning** code is in `api/` folder, **extension** code is in `chrome/` folder, and **website** code is in `website/` folder.
+Code for dbunk.ml. **Machine Learning** code is in `api/` folder, **extension** code is in `chrome/` folder, and **website** code is in `website/` folder.
 
 ## The problem
 
