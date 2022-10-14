@@ -1,4 +1,4 @@
-# sketchy-news
+# dbunk.ml
 
 Code for dbunk.ml. **Machine Learning** code is in `api/` folder, **extension** code is in `chrome/` folder, and **website** code is in `website/` folder.
 
