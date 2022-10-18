@@ -20,7 +20,7 @@ chrome.tabs.query(
 );
 
 function getScore(url) {
-    return postData("https://api.dbunk.ml", { url: url });
+    return postData("https://dbunk-ml.herokuapp.com/", { url: url });
 }
 
 // Get news site info
