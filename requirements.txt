@@ -1,7 +1,7 @@
 tensorflow-cpu==2.4.0
 gunicorn==20.0.4
-Flask==2.2.2
-Flask-Cors==3.0.10
-newspaper3k==0.2.8
-numpy==1.23.4
-scipy==1.9.2
+Flask
+Flask-Cors
+newspaper3k
+numpy
+scipy
