@@ -1,4 +1,4 @@
-tensorflow-cpu
+tensorflow-cpu==2.4.0
 Flask==2.2.2
 Flask-Cors==3.0.10
 newspaper3k==0.2.8
