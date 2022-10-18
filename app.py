@@ -58,9 +58,6 @@ def dbl():
         "text": article.text,
     }
 
-@app.route('/')
-def index():
-    return "<h1>Server loaded. </h1>"
 
 if __name__ == "__main__":
     app.run()
