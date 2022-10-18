@@ -2,6 +2,9 @@
 
 Code for dbunk.ml. **Machine Learning** code is in `api/` folder, **extension** code is in `chrome/` folder, and **website** code is in `website/` folder.
 
+## Demo
+Link to demo: [Hack Cupertino 2020 Submisson - dbunk.ml](https://www.youtube.com/watch?v=S7Kq_X17fcc)
+
 ## The problem
 
 The advent of the Internet and the Information Age has transformed the way we receive and interact with information. Billions of people worldwide now rely on online news sources to stay up-to-date with current topics, and we are now able to spread information at speeds never seen before.
