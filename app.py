@@ -34,6 +34,9 @@ model = tf.keras.models.load_model(
 
 urls = {}
 
+@app.route("/")
+def index():
+    return "dbunk-ml api"
 
 @app.route("/", methods=["POST"])
 def dbl():
